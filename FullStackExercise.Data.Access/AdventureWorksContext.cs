@@ -1,17 +1,23 @@
-﻿using FullStackExercise.Data.Model;
+﻿using System.Reflection;
+using FullStackExercise.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace FullStackExercise.Data.Access
 {
     public class AdventureWorksContext : DbContext
     {
-        public AdventureWorksContext(DbContextOptions options) : base(options)
+        public AdventureWorksContext(DbContextOptions options)
+            : base(options)
         {
-
         }
 
-        public DbSet<Person> Persons { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<SalesOrderHeader> SalesOrderHeaders { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
+        public virtual DbSet<SalesOrderHeader> SalesOrderHeaders { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }
