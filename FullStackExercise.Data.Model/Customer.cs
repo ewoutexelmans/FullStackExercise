@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace FullStackExercise.Data.Model
 {
@@ -15,7 +14,7 @@ namespace FullStackExercise.Data.Model
 
         public string AccountNumber { get; set; }
 
-        public virtual Person Person { get; set; }
-        public virtual ICollection<SalesOrderHeader> SalesOrderHeader { get; set; }
+        public Person Person { get; set; }
+        public ICollection<SalesOrderHeader> SalesOrderHeader { get; set; }
     }
 }
