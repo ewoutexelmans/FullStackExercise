@@ -1,0 +1,6 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "https://github.com/cyclosproject/ng-openapi-gen/blob/master/ng-openapi-gen-schema.json",
+    "title": "Options for ng-openapi-gen",
+    "input": "http://localhost:8080/swagger/v1/swagger.json"
+}
