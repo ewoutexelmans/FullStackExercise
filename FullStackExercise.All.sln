@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FullStackExercise.Web.Api", "FullStackExercise.Web.Api\FullStackExercise.Web.Api.csproj", "{93C90B0C-5EB5-4026-99C4-8F8A52F3D946}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D206B9A5-D709-447E-9031-68E07EAB7795} = {D206B9A5-D709-447E-9031-68E07EAB7795}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FullStackExercise.Data.Access", "FullStackExercise.Data.Access\FullStackExercise.Data.Access.csproj", "{AE2DFD41-471F-4EA5-9411-FA33B24CF1E6}"
 EndProject
