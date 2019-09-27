@@ -15,7 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ApiModule.forRoot({ rootUrl: environment.apiUrl })
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
