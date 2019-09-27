@@ -37,6 +37,7 @@ namespace FullStackExercise.Web.Api
 
             services.AddSwaggerGen(options =>
             {
+                options.CustomOperationIds(desc => desc.ActionDescriptor.RouteValues["action"]);
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "FullStackExercise Api",
