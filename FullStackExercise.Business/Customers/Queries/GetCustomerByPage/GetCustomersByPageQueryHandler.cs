@@ -27,7 +27,7 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
         {
             var validationBag = new ValidationBag();
 
-            if (request.Page < 1)
+            if (request.PageIndex < 0)
             {
                 validationBag.AddError("Give a valid page number starting with 0");
             }
@@ -53,9 +53,9 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
             var rowCount = await query.CountAsync(cancellationToken);
             var pageCount = (int)Math.Ceiling((double)rowCount / request.PageSize);
 
-            if (request.Page > pageCount)
+            if (request.PageIndex >= pageCount)
             {
-                validationBag.AddError($"Page number can't be higher than {pageCount}");
+                validationBag.AddError($"Page number can't be higher than {pageCount - 1}");
             }
 
             if (!validationBag.IsValid)
@@ -67,7 +67,7 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
             }
 
             var customers = await query
-                .Paged(request.Page, request.PageSize)
+                .Paged(request.PageIndex, request.PageSize)
                 .ProjectTo<CustomerLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

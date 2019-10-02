@@ -4,9 +4,9 @@ namespace FullStackExercise.Business.Util
 {
     public static class QueryableExtensions
     {
-        public static IQueryable<T> Paged<T>(this IQueryable<T> query, int page, int pageSize)
+        public static IQueryable<T> Paged<T>(this IQueryable<T> query, int pageIndex, int pageSize)
         {
-            var skip = (page - 1) * pageSize;
+            var skip = pageIndex * pageSize;
             return query.Skip(skip).Take(pageSize);
         }
     }

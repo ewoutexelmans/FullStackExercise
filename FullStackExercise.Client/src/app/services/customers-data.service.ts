@@ -15,9 +15,9 @@ export class CustomersDataService {
     this.pageSubject$,
     this.pageSizeSubject$
   ).pipe(
-    filter(([page, pageSize]) => page > 0 && pageSize > 0),
-    flatMap(([page, pageSize]) =>
-      this.data.getPagedCustomers$Plain({ page, pageSize })
+    filter(([pageIndex, pageSize]) => pageIndex >= 0 && pageSize > 0),
+    flatMap(([pageIndex, pageSize]) =>
+      this.data.getPagedCustomers$Plain({ pageIndex, pageSize })
     ),
     publish(),
     refCount()
@@ -25,8 +25,8 @@ export class CustomersDataService {
 
   constructor(private data: CustomersService) {}
 
-  getCustomers(page = 1) {
-    this.pageSubject$.next(page);
+  getCustomers(pageIndex = 0) {
+    this.pageSubject$.next(pageIndex);
   }
 
   updatePageCount(pageSize: number) {
