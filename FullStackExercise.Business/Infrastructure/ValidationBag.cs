@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace FullStackExercise.Web.Api.Infrastructure
+namespace FullStackExercise.Business.Infrastructure
 {
     public class ValidationBag
     {

@@ -6,7 +6,7 @@ namespace FullStackExercise.Business.Util
     {
         public static IQueryable<T> Paged<T>(this IQueryable<T> query, int page, int pageSize)
         {
-            var skip = page * pageSize;
+            var skip = (page - 1) * pageSize;
             return query.Skip(skip).Take(pageSize);
         }
     }

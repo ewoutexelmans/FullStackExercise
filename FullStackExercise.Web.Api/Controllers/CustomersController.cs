@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using FullStackExercise.Business.Customers.Queries.GetCustomerByPage;
-using FullStackExercise.Web.Api.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,26 +20,20 @@ namespace FullStackExercise.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CustomersListViewModel>> GetPagedCustomers(int page, int pageSize)
+        public async Task<ActionResult<GetCustomersByPageResponse>> GetPagedCustomers(int page, int pageSize)
         {
-            var validationBag = new ValidationBag();
-            if (page < 0)
+            var response = await _mediator.Send(new GetCustomersByPageQuery {Page = page, PageSize = pageSize});
+
+            if (response.Success)
             {
-                validationBag.AddError("Give a valid page number starting with 0");
+                return Ok(new
+                {
+                    response.Customers,
+                    response.PageCount
+                });
             }
 
-            if (!(pageSize > 0))
-            {
-                validationBag.AddError("Page size needs to be larger then 0");
-            }
-
-            if (!validationBag.IsValid)
-            {
-                return BadRequest(validationBag.ErrorMessage);
-            }
-
-            var customers = await _mediator.Send(new GetCustomersByPageQuery { Page = page, PageSize = pageSize });
-            return Ok(customers);
+            return BadRequest(response.Error);
         }
     }
 }
