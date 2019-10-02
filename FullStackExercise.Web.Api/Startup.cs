@@ -44,6 +44,8 @@ namespace FullStackExercise.Web.Api
                     Version = "v1"
                 });
             });
+
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,6 +67,8 @@ namespace FullStackExercise.Web.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
