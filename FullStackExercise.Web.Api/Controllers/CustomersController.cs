@@ -4,7 +4,6 @@ using FullStackExercise.Business.Customers.Queries.GetCustomerByPage;
 using FullStackExercise.Web.Api.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace FullStackExercise.Web.Api.Controllers
 {
@@ -12,15 +11,13 @@ namespace FullStackExercise.Web.Api.Controllers
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
-        private readonly ILogger<CustomersController> _logger;
-        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public CustomersController(ILogger<CustomersController> logger, IMediator mediator, IMapper mapper)
+        public CustomersController(IMapper mapper, IMediator mediator)
         {
-            _logger = logger;
-            _mediator = mediator;
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         [HttpGet]

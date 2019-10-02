@@ -11,9 +11,7 @@ namespace FullStackExercise.Data.Model
 
         public int CustomerId { get; set; }
         public int? PersonId { get; set; }
-
         public string AccountNumber { get; set; }
-
         public Person Person { get; set; }
         public ICollection<SalesOrderHeader> SalesOrderHeader { get; set; }
     }

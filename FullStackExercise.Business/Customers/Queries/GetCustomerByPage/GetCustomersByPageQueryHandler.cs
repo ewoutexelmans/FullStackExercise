@@ -23,7 +23,8 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
             _mapper = mapper;
         }
 
-        public async Task<GetCustomersByPageResponse> Handle(GetCustomersByPageQuery request, CancellationToken cancellationToken)
+        public async Task<GetCustomersByPageResponse> Handle(GetCustomersByPageQuery request,
+            CancellationToken cancellationToken)
         {
             var validationBag = new ValidationBag();
 
