@@ -10,6 +10,7 @@ export class PaginationComponent {
   @Output() changePageIndex = new EventEmitter<number>();
   @Output() changePageSize = new EventEmitter<number>();
   index = 0;
+  sizeOptions = [10, 25, 50, 100];
 
   nextPage() {
     this.next(() => this.index++);
@@ -45,7 +46,7 @@ export class PaginationComponent {
     this.changePageIndex.emit(this.index);
   }
 
-  changeSize(size: number) {
-    this.changePageSize.emit(size);
+  changeSize(size: string) {
+    this.changePageSize.emit(+size);
   }
 }
