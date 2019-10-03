@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using FullStackExercise.Business.Customers.Queries.GetCustomerByPage;
-using FullStackExercise.Web.Api.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,17 +20,9 @@ namespace FullStackExercise.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetCustomersResponse>> GetPagedCustomers([FromQuery] GetCustomersRequest request)
+        public async Task<ActionResult<GetCustomersByPageResponse>> GetPagedCustomers([FromQuery] GetCustomersByPageQuery request)
         {
-            var response = await _mediator.Send(
-                _mapper.Map<GetCustomersByPageQuery>(request));
-
-            if (response.Success)
-            {
-                return Ok(_mapper.Map<GetCustomersResponse>(response));
-            }
-
-            return BadRequest(response.Error);
+            return Ok(await _mediator.Send(request));
         }
     }
 }

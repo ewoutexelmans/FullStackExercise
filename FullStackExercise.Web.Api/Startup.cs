@@ -24,7 +24,6 @@ namespace FullStackExercise.Web.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var apiAssembly = Assembly.GetExecutingAssembly();
             var businessAssembly = Assembly.GetAssembly(typeof(QueryableExtensions));
 
             services.AddControllers();
@@ -34,7 +33,7 @@ namespace FullStackExercise.Web.Api
 
             services.AddMediatR(businessAssembly);
 
-            services.AddAutoMapper(businessAssembly, apiAssembly);
+            services.AddAutoMapper(businessAssembly);
 
             services.AddSwaggerGen(options =>
             {
