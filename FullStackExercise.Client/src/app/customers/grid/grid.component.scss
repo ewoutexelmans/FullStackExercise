@@ -1,0 +1,12 @@
+$rem: 16px;
+
+.table-fixed-head {
+  overflow-y: auto;
+  height: 540px + $rem;
+}
+
+.table-fixed-head thead th {
+  position: sticky;
+  top: 0;
+  border-top: 0;
+}
