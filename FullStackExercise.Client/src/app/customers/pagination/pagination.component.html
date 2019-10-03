@@ -1,4 +1,17 @@
-<button (click)="firstPage()"><<</button
-><button (click)="previousPage()"><</button>
-<p>{{ index + 1 }}</p>
-<button (click)="nextPage()">></button><button (click)="lastPage()">>></button>
+<ul class="pagination justify-content-end">
+  <li class="page-item" [class.disabled]="index === 0">
+    <button (click)="firstPage()" class="page-link">First</button>
+  </li>
+  <li class="page-item" [class.disabled]="index === 0">
+    <button (click)="previousPage()" class="page-link">Previous</button>
+  </li>
+  <li class="page-item active">
+    <span class="page-link">{{ index + 1 }}</span>
+  </li>
+  <li class="page-item" [class.disabled]="index === pageCount - 1">
+    <button (click)="nextPage()" class="page-link">Next</button>
+  </li>
+  <li class="page-item" [class.disabled]="index === pageCount - 1">
+    <button (click)="lastPage()" class="page-link">Last</button>
+  </li>
+</ul>

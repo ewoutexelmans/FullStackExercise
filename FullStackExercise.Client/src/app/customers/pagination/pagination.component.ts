@@ -15,7 +15,7 @@ export class PaginationComponent {
   }
 
   lastPage() {
-    this.next(() => (this.index = this.pageCount));
+    this.next(() => (this.index = this.pageCount - 1));
   }
 
   previousPage() {
@@ -27,7 +27,7 @@ export class PaginationComponent {
   }
 
   next(fn: () => void) {
-    if (this.index < this.pageCount) {
+    if (this.index < this.pageCount - 1) {
       fn();
       this.changeIndex();
     }
