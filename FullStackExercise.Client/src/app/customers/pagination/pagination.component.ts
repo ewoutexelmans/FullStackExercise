@@ -11,16 +11,37 @@ export class PaginationComponent {
   index = 0;
 
   nextPage() {
+    this.next(() => this.index++);
+  }
+
+  last() {
+    this.next(() => (this.index = this.pageCount));
+  }
+
+  previousPage() {
+    this.previous(() => this.index--);
+  }
+
+  first() {
+    this.previous(() => (this.index = 0));
+  }
+
+  next(fn: () => void) {
     if (this.index < this.pageCount) {
-      this.index++;
+      fn();
       this.changeIndex();
     }
   }
 
-  previousPage() {
+  previous(fn: () => void) {
     if (this.index > 0) {
-      this.index--;
+      fn();
       this.changeIndex();
+    }
+  }
+
+  firstPage() {
+    if (this.index > 0) {
     }
   }
 
