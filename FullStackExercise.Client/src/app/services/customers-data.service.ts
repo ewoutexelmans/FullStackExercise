@@ -8,16 +8,15 @@ import { GetCustomersByPageResponse } from '../api/models';
   providedIn: 'root'
 })
 export class CustomersDataService {
-  private pageSubject$ = new BehaviorSubject<number>(0);
+  private pageIndexSubject$ = new BehaviorSubject<number>(0);
   private pageSizeSubject$ = new BehaviorSubject<number>(10);
 
-  public response$: Observable<GetCustomersByPageResponse> = combineLatest(
-    this.pageSubject$,
-    this.pageSizeSubject$
-  ).pipe(
+  public customersPaged$: Observable<
+    GetCustomersByPageResponse
+  > = combineLatest(this.pageIndexSubject$, this.pageSizeSubject$).pipe(
     filter(([pageIndex, pageSize]) => pageIndex >= 0 && pageSize > 0),
     flatMap(([pageIndex, pageSize]) =>
-      this.data.getPagedCustomers$Plain({ pageIndex, pageSize })
+      this.data.getPagedCustomers$Json({ pageIndex, pageSize })
     ),
     publish(),
     refCount()
@@ -26,7 +25,7 @@ export class CustomersDataService {
   constructor(private data: CustomersService) {}
 
   getCustomers(pageIndex = 0) {
-    this.pageSubject$.next(pageIndex);
+    this.pageIndexSubject$.next(pageIndex);
   }
 
   updatePageCount(pageSize: number) {

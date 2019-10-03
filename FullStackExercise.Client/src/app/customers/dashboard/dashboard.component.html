@@ -1,1 +1,3 @@
-<app-grid></app-grid>
+<div *ngIf="customersPaged$ | async as customersPaged">
+  <app-grid [customers]="customersPaged.customers"></app-grid>
+</div>
