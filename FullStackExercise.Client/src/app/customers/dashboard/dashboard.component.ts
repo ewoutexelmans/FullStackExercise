@@ -3,8 +3,7 @@ import { CustomersDataService } from 'src/app/services/customers-data.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
   customersPaged$ = this.data.customersPaged$;
@@ -13,5 +12,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.data.getCustomers();
+  }
+
+  changePageIndex(id: number) {
+    this.data.getCustomers(id);
+  }
+
+  changePageSize(size: number) {
+    this.data.updatePageSize(size);
   }
 }

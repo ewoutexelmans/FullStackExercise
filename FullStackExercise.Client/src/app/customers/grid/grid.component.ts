@@ -4,7 +4,6 @@ import { CustomerLookupDto } from 'src/app/api/models';
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss']
 })
 export class GridComponent {
   @Input() customers: Array<CustomerLookupDto>;

@@ -1,3 +1,4 @@
-<div class="row" *ngIf="customersPaged$ | async as customersPaged">
+<div *ngIf="customersPaged$ | async as customersPaged">
   <app-grid class="col" [customers]="customersPaged.customers"></app-grid>
+  <app-pagination (changePageIndex)="changePageIndex($event)" (changePageSize)="changePageSize($event)"></app-pagination>
 </div>

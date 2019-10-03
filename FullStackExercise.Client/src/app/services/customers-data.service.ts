@@ -28,7 +28,7 @@ export class CustomersDataService {
     this.pageIndexSubject$.next(pageIndex);
   }
 
-  updatePageCount(pageSize: number) {
+  updatePageSize(pageSize: number) {
     this.pageSizeSubject$.next(pageSize);
   }
 }
