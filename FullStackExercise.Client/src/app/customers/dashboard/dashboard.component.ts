@@ -30,4 +30,12 @@ export class DashboardComponent implements OnInit {
   changeFilters(filters: Array<FilterType>) {
     this.data.updateFilters(filters);
   }
+
+  filterSum(sum: number) {
+    this.data.filterSum(sum);
+  }
+
+  changeHigherLower(higherLower?: boolean) {
+    this.data.updateHigherLower(higherLower);
+  }
 }

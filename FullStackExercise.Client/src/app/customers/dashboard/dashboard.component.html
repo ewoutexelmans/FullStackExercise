@@ -6,6 +6,12 @@
     ></app-filter>
   </div>
   <div class="mb-1">
+    <app-sum-comparison
+      (changeHigherLower)="changeHigherLower($event)"
+      (changeSumComparison)="filterSum($event)"
+    ></app-sum-comparison>
+  </div>
+  <div class="mb-1">
     <app-grid [customers]="customersPaged.customers"></app-grid>
   </div>
   <div class="mt-1">

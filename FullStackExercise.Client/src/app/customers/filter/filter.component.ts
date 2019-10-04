@@ -10,6 +10,7 @@ import { FilterType } from 'src/app/api/models';
 export class FilterComponent {
   @Output() changeKeyWord = new Observable<string>();
   @Output() changeActiveFilters = new EventEmitter<Array<FilterType>>();
+
   keyWordSubject$ = new Subject<string>();
   filters: Array<FilterType> = [];
 
