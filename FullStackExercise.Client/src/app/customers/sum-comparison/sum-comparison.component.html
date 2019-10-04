@@ -1,1 +1,40 @@
-<p>sum-comparison works!</p>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">
+      Sum of Total Due
+    </span>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [class.active]="higherLower === true"
+      (click)="filter(true)"
+    >
+      Higher Than
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [class.active]="higherLower === false"
+      (click)="filter(false)"
+    >
+      Lower Than
+    </button>
+  </div>
+  <input
+    type="number"
+    class="form-control border-0 bg-light"
+    (input)="updateSum($event.target.value)"
+    step="0.0001"
+    min="0"
+    #sumInput
+  />
+  <div class="input-group-append">
+    <button
+      *ngIf="higherLower != null"
+      class="btn"
+      (click)="filter(null); sumInput.value = ''"
+    >
+      <i class="fa fa-times-circle"></i>
+    </button>
+  </div>
+</div>
