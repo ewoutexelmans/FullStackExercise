@@ -1,5 +1,5 @@
 <div *ngIf="customersPaged$ | async as customersPaged">
-  <div>
+  <div class="mb-1">
     <app-filter
       (changeKeyWord)="filterCustomers($event)"
       (changeActiveFilters)="changeFilters($event)"
