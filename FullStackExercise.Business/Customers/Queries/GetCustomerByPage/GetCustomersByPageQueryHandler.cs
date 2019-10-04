@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using FullStackExercise.Business.Util;
 using FullStackExercise.Data.Access;
+using FullStackExercise.Data.Model;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,21 +37,27 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
                 request.PageIndex = 0;
             }
 
-            var query = _ctx.Customers
-                .Where(c => c.PersonId != null);
+            var query = _ctx.Customers.Where(c => c.PersonId != null);
+
+            if (!string.IsNullOrEmpty(request.KeyWord))
+            {
+                query = BuildFilteredQuery(query, request.Filters, request.KeyWord);
+            }
 
             var rowCount = await query.CountAsync(cancellationToken);
             var pageCount = (int)Math.Ceiling((double)rowCount / request.PageSize);
 
             if (request.PageIndex >= pageCount)
             {
-                request.PageIndex = pageCount - 1;
+                request.PageIndex = pageCount > 0 ? pageCount - 1 : 0;
             }
 
-            var customers = await query.Include(c => c.Person)
+            var customers = await query
+                .Include(c => c.Person)
                 .Include(c => c.SalesOrderHeader)
-                .Paged(request.PageIndex, request.PageSize)
+                .OrderBy(c => c.CustomerId)
                 .ProjectTo<CustomerLookupDto>(_mapper.ConfigurationProvider)
+                .Paged(request.PageIndex, request.PageSize)
                 .ToListAsync(cancellationToken);
 
             return new GetCustomersByPageResponse
@@ -58,6 +66,32 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
                 PageIndex = request.PageIndex,
                 PageCount = pageCount
             };
+        }
+
+        private static IQueryable<Customer> BuildFilteredQuery(IQueryable<Customer> query,
+            IReadOnlyCollection<FilterType> filters, string keyWord)
+        {
+            var predicate = PredicateBuilder.New<Customer>();
+            keyWord = keyWord.ToLower();
+
+            var filterAll = filters == null || filters.Count == 0;
+
+            if (filterAll || filters.Any(type => type == FilterType.FirstName))
+            {
+                predicate = predicate.Or(c => c.Person.FirstName.ToLower().Contains(keyWord));
+            }
+
+            if (filterAll || filters.Any(type => type == FilterType.LastName))
+            {
+                predicate = predicate.Or(c => c.Person.LastName.ToLower().Contains(keyWord));
+            }
+
+            if (filterAll || filters.Any(type => type == FilterType.AccountNumber))
+            {
+                predicate = predicate.Or(c => c.AccountNumber.ToLower().Contains(keyWord));
+            }
+
+            return query.Where(predicate);
         }
     }
 }

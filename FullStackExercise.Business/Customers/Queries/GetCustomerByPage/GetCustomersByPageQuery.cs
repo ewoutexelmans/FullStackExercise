@@ -6,5 +6,7 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
     {
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
+        public string KeyWord { get; set; }
+        public FilterType[] Filters { get; set; }
     }
 }
