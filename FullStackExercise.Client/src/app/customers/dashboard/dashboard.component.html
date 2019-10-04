@@ -1,4 +1,10 @@
 <div *ngIf="customersPaged$ | async as customersPaged">
+  <div>
+    <app-filter
+      (changeKeyWord)="filterCustomers($event)"
+      (changeActiveFilters)="changeFilters($event)"
+    ></app-filter>
+  </div>
   <div class="mb-1">
     <app-grid [customers]="customersPaged.customers"></app-grid>
   </div>
