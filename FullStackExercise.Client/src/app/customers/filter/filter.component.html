@@ -1,1 +1,55 @@
-<p>filter works!</p>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">
+      <i class="fa fa-filter"></i>
+    </span>
+  </div>
+  <input
+    type="text"
+    placeholder="Filter..."
+    class="form-control border-0 bg-light"
+    #filterInput
+    (input)="filter($event.target.value)"
+  />
+  <div class="input-group-append">
+    <button
+      *ngIf="filterInput.value"
+      class="btn"
+      (click)="filter(''); filterInput.value = ''"
+    >
+      <i class="fa fa-times-circle"></i>
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [class.active]="filters.length == 0"
+      (click)="clear()"
+    >
+      All
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [class.active]="filters.includes('firstName')"
+      (click)="toggleFilterType('firstName')"
+    >
+      First Name
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [class.active]="filters.includes('lastName')"
+      (click)="toggleFilterType('lastName')"
+    >
+      Last Name
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [class.active]="filters.includes('accountNumber')"
+      (click)="toggleFilterType('accountNumber')"
+    >
+      Account Number
+    </button>
+  </div>
+</div>
