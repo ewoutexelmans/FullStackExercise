@@ -1,8 +1,13 @@
 <div *ngIf="customersPaged$ | async as customersPaged">
-  <app-grid [customers]="customersPaged.customers"></app-grid>
-  <app-pagination
-    (changePageIndex)="changePageIndex($event)"
-    (changePageSize)="changePageSize($event)"
-    [pageCount]="customersPaged.pageCount"
-  ></app-pagination>
+  <div class="mb-1">
+    <app-grid [customers]="customersPaged.customers"></app-grid>
+  </div>
+  <div class="mt-1">
+    <app-pagination
+      (changePageIndex)="changePageIndex($event)"
+      (changePageSize)="changePageSize($event)"
+      [pageCount]="customersPaged.pageCount"
+      [pageIndex]="customersPaged.pageIndex"
+    ></app-pagination>
+  </div>
 </div>

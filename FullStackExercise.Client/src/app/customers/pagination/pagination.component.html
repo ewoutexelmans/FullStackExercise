@@ -1,22 +1,22 @@
 <div class="d-flex justify-content-end">
   <ul class="pagination">
-    <li class="page-item" [class.disabled]="index === 0">
+    <li class="page-item" [class.disabled]="pageIndex === 0">
       <button (click)="firstPage()" class="page-link">First</button>
     </li>
-    <li class="page-item" [class.disabled]="index === 0">
+    <li class="page-item" [class.disabled]="pageIndex === 0">
       <button (click)="previousPage()" class="page-link">Previous</button>
     </li>
     <li class="page-item active">
-      <span class="page-link">{{ index + 1 }}</span>
+      <span class="page-link">{{ pageIndex + 1 }}</span>
     </li>
-    <li class="page-item" [class.disabled]="index === pageCount - 1">
+    <li class="page-item" [class.disabled]="pageIndex === pageCount - 1">
       <button (click)="nextPage()" class="page-link">Next</button>
     </li>
-    <li class="page-item" [class.disabled]="index === pageCount - 1">
+    <li class="page-item" [class.disabled]="pageIndex === pageCount - 1">
       <button (click)="lastPage()" class="page-link">Last</button>
     </li>
   </ul>
   <select class="form-control ml-2" (change)="changeSize($event.target.value)">
-    <option *ngFor="let size of sizeOptions">{{ size }}</option>
+    <option *ngFor="let pageSize of pageSizeOptions">{{ pageSize }}</option>
   </select>
 </div>

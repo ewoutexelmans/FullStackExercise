@@ -30,6 +30,11 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
                 request.PageSize = 1;
             }
 
+            if (request.PageIndex < 0)
+            {
+                request.PageIndex = 0;
+            }
+
             var query = _ctx.Customers
                 .Where(c => c.PersonId != null);
 
@@ -50,6 +55,7 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
             return new GetCustomersByPageResponse
             {
                 Customers = customers,
+                PageIndex = request.PageIndex,
                 PageCount = pageCount
             };
         }

@@ -5,6 +5,7 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
     public class GetCustomersByPageResponse
     {
         public IList<CustomerLookupDto> Customers { get; set; }
+        public int PageIndex { get; set; }
         public int PageCount { get; set; }
     }
 }
