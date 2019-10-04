@@ -52,11 +52,18 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
                 request.PageIndex = pageCount > 0 ? pageCount - 1 : 0;
             }
 
-            var customers = await query
-                .Include(c => c.Person)
-                .Include(c => c.SalesOrderHeader)
-                .OrderBy(c => c.CustomerId)
-                .ProjectTo<CustomerLookupDto>(_mapper.ConfigurationProvider)
+            var projectedQuery = query
+                  .Include(c => c.Person)
+                  .Include(c => c.SalesOrderHeader)
+                  .OrderBy(c => c.CustomerId)
+                  .ProjectTo<CustomerLookupDto>(_mapper.ConfigurationProvider);
+
+            if (request.HigherLower != null)
+            {
+                projectedQuery = request.HigherLower.Value ? projectedQuery.Where(c => c.SumOfTotalDue >= request.SumComparison) : projectedQuery.Where(c => c.SumOfTotalDue <= request.SumComparison);
+            }
+
+            var customers = await projectedQuery
                 .Paged(request.PageIndex, request.PageSize)
                 .ToListAsync(cancellationToken);
 
