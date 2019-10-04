@@ -12,6 +12,8 @@ export class CustomersDataService {
   private pageSizeSubject$ = new BehaviorSubject<number>(10);
   private keyWordSubject$ = new BehaviorSubject<string>('');
   private filtersSubject$ = new BehaviorSubject<Array<FilterType>>([]);
+  private higherLowerSubject$ = new BehaviorSubject<boolean>(null);
+  private sumComparisonSubject$ = new BehaviorSubject<number>(0);
 
   public customersPaged$: Observable<
     GetCustomersByPageResponse
@@ -19,15 +21,20 @@ export class CustomersDataService {
     this.pageIndexSubject$,
     this.pageSizeSubject$,
     this.keyWordSubject$,
-    this.filtersSubject$
+    this.filtersSubject$,
+    this.higherLowerSubject$,
+    this.sumComparisonSubject$
   ).pipe(
-    flatMap(([pageIndex, pageSize, keyWord, filters]) =>
-      this.data.getPagedCustomers$Json({
-        pageIndex,
-        pageSize,
-        keyWord,
-        filters
-      })
+    flatMap(
+      ([pageIndex, pageSize, keyWord, filters, higherLower, sumComparison]) =>
+        this.data.getPagedCustomers$Json({
+          pageIndex,
+          pageSize,
+          keyWord,
+          sumComparison,
+          filters,
+          higherLower
+        })
     ),
     publish(),
     refCount()
@@ -49,5 +56,13 @@ export class CustomersDataService {
 
   updateFilters(filters: Array<FilterType>) {
     this.filtersSubject$.next(filters);
+  }
+
+  filterSum(sumComparison = 0) {
+    this.sumComparisonSubject$.next(sumComparison);
+  }
+
+  updateHigherLower(higherLower?: boolean) {
+    this.higherLowerSubject$.next(higherLower);
   }
 }
