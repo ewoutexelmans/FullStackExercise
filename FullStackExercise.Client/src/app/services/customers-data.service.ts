@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { CustomersService } from '../api/services';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { flatMap, publish, refCount } from 'rxjs/operators';
-import { GetCustomersByPageResponse, FilterType } from '../api/models';
+import {
+  GetCustomersByPageResponse,
+  FilterType,
+  CustomerLookupDto
+} from '../api/models';
+import { invokeRequest } from '../util/invoke-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomersDataService {
+  private refreshSubject$ = new BehaviorSubject(null);
   private pageIndexSubject$ = new BehaviorSubject<number>(0);
   private pageSizeSubject$ = new BehaviorSubject<number>(10);
   private keyWordSubject$ = new BehaviorSubject<string>('');
@@ -23,7 +29,8 @@ export class CustomersDataService {
     this.keyWordSubject$,
     this.filtersSubject$,
     this.higherLowerSubject$,
-    this.sumComparisonSubject$
+    this.sumComparisonSubject$,
+    this.refreshSubject$
   ).pipe(
     flatMap(
       ([pageIndex, pageSize, keyWord, filters, higherLower, sumComparison]) =>
@@ -39,6 +46,8 @@ export class CustomersDataService {
     publish(),
     refCount()
   );
+
+  private refresh = () => this.refreshSubject$.next(null);
 
   constructor(private data: CustomersService) {}
 
@@ -64,5 +73,18 @@ export class CustomersDataService {
 
   changeHigherLower(higherLower?: boolean) {
     this.higherLowerSubject$.next(higherLower);
+  }
+
+  updateCustomer(customer: CustomerLookupDto) {
+    invokeRequest(
+      this.data.updateCustomer$Json({
+        body: {
+          customerId: customer.customerId,
+          firstName: customer.firstName,
+          lastName: customer.lastName
+        }
+      }),
+      this.refresh
+    );
   }
 }
