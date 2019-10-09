@@ -1,4 +1,4 @@
-<div *ngIf="customersPaged$ | async as customersPaged">
+<div *ngIf="customersPaged$ | async as customersPaged; else loading">
   <div class="mb-1">
     <app-filter
       (changeKeyWord)="filterCustomers($event)"
@@ -23,3 +23,4 @@
     ></app-pagination>
   </div>
 </div>
+<ng-template #loading><app-spinner></app-spinner></ng-template>

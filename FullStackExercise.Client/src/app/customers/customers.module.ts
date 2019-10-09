@@ -9,7 +9,13 @@ import { FilterComponent } from './filter/filter.component';
 import { SumComparisonComponent } from './sum-comparison/sum-comparison.component';
 
 @NgModule({
-  declarations: [DashboardComponent, GridComponent, PaginationComponent, FilterComponent, SumComparisonComponent],
+  declarations: [
+    DashboardComponent,
+    GridComponent,
+    PaginationComponent,
+    FilterComponent,
+    SumComparisonComponent
+  ],
   imports: [CommonModule, CustomersRoutingModule, SharedModule]
 })
 export class CustomersModule {}
