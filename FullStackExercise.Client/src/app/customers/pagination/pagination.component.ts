@@ -46,6 +46,7 @@ export class PaginationComponent {
 
   changeIndex() {
     this.changePageIndex.emit(this.pageIndex);
+    console.log(this.pageCount);
   }
 
   changeSize(size: string) {

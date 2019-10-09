@@ -44,14 +44,6 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
                 query = BuildFilteredQuery(query, request.Filters, request.KeyWord);
             }
 
-            var rowCount = await query.CountAsync(cancellationToken);
-            var pageCount = (int)Math.Ceiling((double)rowCount / request.PageSize);
-
-            if (request.PageIndex >= pageCount)
-            {
-                request.PageIndex = pageCount > 0 ? pageCount - 1 : 0;
-            }
-
             var projectedQuery = query
                   .Include(c => c.Person)
                   .Include(c => c.SalesOrderHeader)
@@ -61,6 +53,14 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
             if (request.HigherLower != null)
             {
                 projectedQuery = request.HigherLower.Value ? projectedQuery.Where(c => c.SumOfTotalDue >= request.SumComparison) : projectedQuery.Where(c => c.SumOfTotalDue <= request.SumComparison);
+            }
+
+            var rowCount = await projectedQuery.CountAsync(cancellationToken);
+            var pageCount = (int)Math.Ceiling((double)rowCount / request.PageSize);
+
+            if (request.PageIndex >= pageCount)
+            {
+                request.PageIndex = pageCount > 0 ? pageCount - 1 : 0;
             }
 
             var customers = await projectedQuery
