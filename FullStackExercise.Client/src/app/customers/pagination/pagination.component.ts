@@ -9,8 +9,8 @@ export class PaginationComponent {
   @Input() pageCount: number;
   @Input() pageIndex: number;
 
-  @Output() changePageIndex = new EventEmitter<number>();
-  @Output() changePageSize = new EventEmitter<number>();
+  @Output() pageIndexChange = new EventEmitter<number>();
+  @Output() pageSizeChange = new EventEmitter<number>();
 
   pageSizeOptions = [10, 25, 50, 100];
 
@@ -45,10 +45,10 @@ export class PaginationComponent {
   }
 
   changeIndex() {
-    this.changePageIndex.emit(this.pageIndex);
+    this.pageIndexChange.emit(this.pageIndex);
   }
 
   changeSize(size: string) {
-    this.changePageSize.emit(+size);
+    this.pageSizeChange.emit(+size);
   }
 }

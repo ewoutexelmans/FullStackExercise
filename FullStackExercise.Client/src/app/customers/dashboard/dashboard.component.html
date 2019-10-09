@@ -1,14 +1,14 @@
 <div *ngIf="customersPaged$ | async as customersPaged; else loading">
   <div class="mb-1">
     <app-filter
-      (changeKeyWord)="filterCustomers($event)"
-      (changeActiveFilters)="changeFilters($event)"
+      (keywordChange)="filterCustomers($event)"
+      (activeFiltersChange)="changeFilters($event)"
     ></app-filter>
   </div>
   <div class="mb-1">
     <app-sum-comparison
-      (changeHigherLower)="changeHigherLower($event)"
-      (changeSumComparison)="filterSum($event)"
+      (higherLowerChange)="changeHigherLower($event)"
+      (sumComparisonChange)="filterSum($event)"
     ></app-sum-comparison>
   </div>
   <div class="mb-1">
@@ -16,8 +16,8 @@
   </div>
   <div class="mt-1">
     <app-pagination
-      (changePageIndex)="changePageIndex($event)"
-      (changePageSize)="changePageSize($event)"
+      (pageIndexChange)="changePageIndex($event)"
+      (pageSizeChange)="changePageSize($event)"
       [pageCount]="customersPaged.pageCount"
       [pageIndex]="customersPaged.pageIndex"
     ></app-pagination>

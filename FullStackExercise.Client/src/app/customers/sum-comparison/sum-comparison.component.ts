@@ -7,14 +7,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './sum-comparison.component.html'
 })
 export class SumComparisonComponent {
-  @Output() changeHigherLower = new EventEmitter<boolean | null>();
-  @Output() changeSumComparison = new Observable<number>();
+  @Output() higherLowerChange = new EventEmitter<boolean | null>();
+  @Output() sumComparisonChange = new Observable<number>();
 
   sumComparisonSubject$ = new Subject<number>();
   higherLower?: boolean;
 
   constructor() {
-    this.changeSumComparison = this.sumComparisonSubject$.pipe(
+    this.sumComparisonChange = this.sumComparisonSubject$.pipe(
       debounceTime(1000),
       distinctUntilChanged()
     );
@@ -22,7 +22,7 @@ export class SumComparisonComponent {
 
   filter(higherLower?: boolean) {
     this.higherLower = higherLower;
-    this.changeHigherLower.emit(this.higherLower);
+    this.higherLowerChange.emit(this.higherLower);
   }
 
   updateSum(sum: string) {

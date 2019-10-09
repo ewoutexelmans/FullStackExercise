@@ -8,14 +8,14 @@ import { FilterType } from 'src/app/api/models';
   templateUrl: './filter.component.html'
 })
 export class FilterComponent {
-  @Output() changeKeyWord = new Observable<string>();
-  @Output() changeActiveFilters = new EventEmitter<Array<FilterType>>();
+  @Output() keyWordChange = new Observable<string>();
+  @Output() activeFiltersChange = new EventEmitter<Array<FilterType>>();
 
   keyWordSubject$ = new Subject<string>();
   filters: Array<FilterType> = [];
 
   constructor() {
-    this.changeKeyWord = this.keyWordSubject$.pipe(
+    this.keyWordChange = this.keyWordSubject$.pipe(
       debounceTime(1000),
       distinctUntilChanged()
     );
@@ -40,6 +40,6 @@ export class FilterComponent {
   }
 
   changeFilters() {
-    this.changeActiveFilters.emit(this.filters);
+    this.activeFiltersChange.emit(this.filters);
   }
 }
