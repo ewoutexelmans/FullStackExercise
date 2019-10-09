@@ -46,7 +46,7 @@ export class CustomersDataService {
     this.pageIndexSubject$.next(pageIndex);
   }
 
-  updatePageSize(pageSize: number) {
+  changePageSize(pageSize: number) {
     this.pageSizeSubject$.next(pageSize);
   }
 
@@ -54,7 +54,7 @@ export class CustomersDataService {
     this.keyWordSubject$.next(keyWord);
   }
 
-  updateFilters(filters: Array<FilterType>) {
+  changeFilters(filters: Array<FilterType>) {
     this.filtersSubject$.next(filters);
   }
 
@@ -62,7 +62,7 @@ export class CustomersDataService {
     this.sumComparisonSubject$.next(sumComparison);
   }
 
-  updateHigherLower(higherLower?: boolean) {
+  changeHigherLower(higherLower?: boolean) {
     this.higherLowerSubject$.next(higherLower);
   }
 }

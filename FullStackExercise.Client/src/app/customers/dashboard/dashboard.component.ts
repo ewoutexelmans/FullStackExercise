@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   changePageSize(size: number) {
-    this.data.updatePageSize(size);
+    this.data.changePageSize(size);
   }
 
   filterCustomers(keyWord: string) {
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   }
 
   changeFilters(filters: Array<FilterType>) {
-    this.data.updateFilters(filters);
+    this.data.changeFilters(filters);
   }
 
   filterSum(sum: number) {
@@ -36,6 +36,6 @@ export class DashboardComponent implements OnInit {
   }
 
   changeHigherLower(higherLower?: boolean) {
-    this.data.updateHigherLower(higherLower);
+    this.data.changeHigherLower(higherLower);
   }
 }
