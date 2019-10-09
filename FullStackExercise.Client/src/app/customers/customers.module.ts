@@ -7,6 +7,7 @@ import { GridComponent } from './grid/grid.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FilterComponent } from './filter/filter.component';
 import { SumComparisonComponent } from './sum-comparison/sum-comparison.component';
+import { EditableFieldComponent } from './editable-field/editable-field.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SumComparisonComponent } from './sum-comparison/sum-comparison.componen
     GridComponent,
     PaginationComponent,
     FilterComponent,
-    SumComparisonComponent
+    SumComparisonComponent,
+    EditableFieldComponent
   ],
   imports: [CommonModule, CustomersRoutingModule, SharedModule]
 })
