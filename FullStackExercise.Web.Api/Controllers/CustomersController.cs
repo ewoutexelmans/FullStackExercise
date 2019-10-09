@@ -3,6 +3,7 @@ using FullStackExercise.Business.Customers.Commands.UpdateCustomer;
 using FullStackExercise.Business.Customers.Queries.GetCustomerByPage;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace FullStackExercise.Web.Api.Controllers
 {
@@ -23,7 +24,11 @@ namespace FullStackExercise.Web.Api.Controllers
             Ok(await _mediator.Send(request));
 
         [HttpPost]
-        public async Task<ActionResult> UpdateCustomer([FromBody] UpdateCustomerCommand request) =>
-            Ok(await _mediator.Send(request));
+        [SwaggerResponse(204, "Customer updated.")]
+        public async Task<ActionResult> UpdateCustomer([FromBody] UpdateCustomerCommand request)
+        {
+            await _mediator.Send(request);
+            return NoContent();
+        }
     }
 }
