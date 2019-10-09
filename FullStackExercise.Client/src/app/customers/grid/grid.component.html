@@ -6,16 +6,29 @@
         <th scope="col">Last Name</th>
         <th scope="col">Account Number</th>
         <th scope="col">Sum of Total Due</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let customer of customers">
-        <td><app-editable-field [value]="customer.firstName"></app-editable-field></td>
+      <tr
+        *ngFor="let customer of customers"
+        (click)="toggleEditing(customer.customerId)"
+      >
         <td>
-          <app-editable-field [value]="customer.lastName"></app-editable-field>
+          <app-editable-field
+            [(value)]="customer.firstName"
+            [editing]="editing === customer.customerId"
+          ></app-editable-field>
+        </td>
+        <td>
+          <app-editable-field
+            [(value)]="customer.lastName"
+            [editing]="editing === customer.customerId"
+          ></app-editable-field>
         </td>
         <td>{{ customer.accountNumber }}</td>
         <td>{{ customer.sumOfTotalDue }}</td>
+        <td class="td-edit"><span>Edit</span></td>
       </tr>
     </tbody>
   </table>

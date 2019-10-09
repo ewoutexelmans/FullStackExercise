@@ -2,11 +2,27 @@ $rem: 16px;
 
 .table-fixed-head {
   overflow-y: auto;
-  height: 540px + $rem;
+  height: 553px + $rem;
+
+  thead th {
+    position: sticky;
+    top: 0;
+    border-top: 0;
+  }
 }
 
-.table-fixed-head thead th {
-  position: sticky;
-  top: 0;
-  border-top: 0;
+.td-edit {
+  span {
+    display: none;
+  }
+}
+
+tr:hover {
+  cursor: pointer;
+
+  .td-edit {
+    span {
+      display: initial;
+    }
+  }
 }

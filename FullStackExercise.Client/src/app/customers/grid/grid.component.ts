@@ -8,8 +8,9 @@ import { CustomerLookupDto } from 'src/app/api/models';
 })
 export class GridComponent {
   @Input() customers: Array<CustomerLookupDto>;
+  editing = 0;
 
-  constructor() {
-    console.log(this.customers);
+  toggleEditing(id: number) {
+    this.editing = id;
   }
 }
