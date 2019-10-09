@@ -10,10 +10,8 @@ namespace FullStackExercise.Business.Util
         public static Expression<Func<T, bool>> New<T>() => param => false;
 
         public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first,
-            Expression<Func<T, bool>> second)
-        {
-            return first.Compose(second, Expression.OrElse);
-        }
+            Expression<Func<T, bool>> second) =>
+            first.Compose(second, Expression.OrElse);
 
         private static Expression<T> Compose<T>(this Expression<T> first, Expression<T> second,
             Func<Expression, Expression, Expression> merge)
@@ -23,7 +21,6 @@ namespace FullStackExercise.Business.Util
                 .ToDictionary(p => p.s, p => p.f);
 
             var secondBody = ParameterReBinder.ReplaceParameters(map, second.Body);
-
             return Expression.Lambda<T>(merge(first.Body, secondBody), first.Parameters);
         }
 
@@ -37,10 +34,8 @@ namespace FullStackExercise.Business.Util
             }
 
             public static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> map,
-                Expression exp)
-            {
-                return new ParameterReBinder(map).Visit(exp);
-            }
+                Expression exp) =>
+                new ParameterReBinder(map).Visit(exp);
 
             protected override Expression VisitParameter(ParameterExpression p)
             {

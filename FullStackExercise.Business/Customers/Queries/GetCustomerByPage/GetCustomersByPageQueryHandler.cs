@@ -45,14 +45,16 @@ namespace FullStackExercise.Business.Customers.Queries.GetCustomerByPage
             }
 
             var projectedQuery = query
-                  .Include(c => c.Person)
-                  .Include(c => c.SalesOrderHeader)
-                  .OrderBy(c => c.CustomerId)
-                  .ProjectTo<CustomerLookupDto>(_mapper.ConfigurationProvider);
+                .Include(c => c.Person)
+                .Include(c => c.SalesOrderHeader)
+                .OrderBy(c => c.CustomerId)
+                .ProjectTo<CustomerLookupDto>(_mapper.ConfigurationProvider);
 
             if (request.HigherLower != null)
             {
-                projectedQuery = request.HigherLower.Value ? projectedQuery.Where(c => c.SumOfTotalDue >= request.SumComparison) : projectedQuery.Where(c => c.SumOfTotalDue <= request.SumComparison);
+                projectedQuery = request.HigherLower.Value
+                    ? projectedQuery.Where(c => c.SumOfTotalDue >= request.SumComparison)
+                    : projectedQuery.Where(c => c.SumOfTotalDue <= request.SumComparison);
             }
 
             var rowCount = await projectedQuery.CountAsync(cancellationToken);

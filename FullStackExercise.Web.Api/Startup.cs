@@ -70,10 +70,7 @@ namespace FullStackExercise.Web.Api
 
             app.UseCors(builder => builder.AllowAnyOrigin());
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
