@@ -8,4 +8,8 @@ import { CustomerLookupDto } from 'src/app/api/models';
 })
 export class GridComponent {
   @Input() customers: Array<CustomerLookupDto>;
+
+  constructor() {
+    console.log(this.customers);
+  }
 }
