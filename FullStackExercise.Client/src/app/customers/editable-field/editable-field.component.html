@@ -1,1 +1,9 @@
-{{ value }}
+<input
+  *ngIf="editing; else notEditing"
+  type="text"
+  #box
+  (keyup)="onKey(box.value)"
+  placeholder="{{ value }}"
+  class="form-control"
+/>
+<ng-template #notEditing>{{ value }}</ng-template>
