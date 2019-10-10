@@ -3,7 +3,7 @@ $hover-color: hsl(0, 0%, 83%);
 $background-color: hsl(0, 0%, 100%);
 
 .grid {
-  height: 553px + $rem;
+  height: 460px + $rem;
   overflow-y: auto;
 }
 
@@ -12,12 +12,16 @@ $background-color: hsl(0, 0%, 100%);
 
   h6 {
     border-top: 0;
-    flex: 0 0 21%;
+    flex: 0 0 20%;
     font-size: 1rem;
     margin: 0;
     padding: 1rem;
     position: sticky;
     top: 0;
+
+    &:last-child {
+      flex: 0 0 0;
+    }
   }
 }
 
@@ -26,17 +30,17 @@ $background-color: hsl(0, 0%, 100%);
   border: 0;
   display: flex;
   flex: 0;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0.5rem 1rem;
 
   span {
-    display: none;
+    flex: 1;
   }
 }
 
 .grid-row {
   display: flex;
-  flex: 0 0 84%;
+  flex: 0 0 80%;
 
   div {
     border-top: 1px solid $hover-color;
@@ -46,8 +50,11 @@ $background-color: hsl(0, 0%, 100%);
 }
 
 form {
-  cursor: pointer;
   display: flex;
+
+  > div {
+    cursor: pointer;
+  }
 
   &:hover {
     div {
@@ -56,9 +63,6 @@ form {
 
     .div-edit {
       background: $background-color;
-      span {
-        display: inline-block;
-      }
     }
   }
 }

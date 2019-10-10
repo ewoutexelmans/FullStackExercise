@@ -1,11 +1,11 @@
 <div *ngIf="customersPaged$ | async as customersPaged; else loading">
-  <div class="mb-1">
+  <div class="mb-1 col">
     <app-filter
       (keywordChange)="filterCustomers($event)"
       (activeFiltersChange)="changeFilters($event)"
     ></app-filter>
   </div>
-  <div class="mb-1">
+  <div class="mb-1 col-6">
     <app-sum-comparison
       (higherLowerChange)="changeHigherLower($event)"
       (sumComparisonChange)="filterSum($event)"

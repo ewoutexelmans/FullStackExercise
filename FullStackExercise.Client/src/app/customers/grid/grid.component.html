@@ -4,6 +4,7 @@
     <h6 class="bg-dark text-white">Last Name</h6>
     <h6 class="bg-dark text-white">Account Number</h6>
     <h6 class="bg-dark text-white">Sum of Total Due</h6>
+    <h6 class="text-dark">Edit</h6>
   </div>
 
   <form
@@ -30,7 +31,9 @@
       <div>{{ customer.sumOfTotalDue }}</div>
     </div>
     <div class="div-edit">
-      <span *ngIf="editId !== customer.customerId; else submitButtons"
+      <span
+        *ngIf="editId !== customer.customerId; else submitButtons"
+        (click)="toggleEditing(customer.customerId)"
         ><i class="fa fa-edit"></i
       ></span>
       <ng-template #submitButtons>
@@ -47,4 +50,3 @@
     </h4>
   </div>
 </div>
-<div>{{ editId }}</div>
