@@ -8,6 +8,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { FilterComponent } from './filter/filter.component';
 import { SumComparisonComponent } from './sum-comparison/sum-comparison.component';
 import { EditableFieldComponent } from './editable-field/editable-field.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,11 @@ import { EditableFieldComponent } from './editable-field/editable-field.componen
     SumComparisonComponent,
     EditableFieldComponent
   ],
-  imports: [CommonModule, CustomersRoutingModule, SharedModule]
+  imports: [
+    CommonModule,
+    CustomersRoutingModule,
+    SharedModule,
+    ReactiveFormsModule
+  ]
 })
 export class CustomersModule {}
