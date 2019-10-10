@@ -23,7 +23,7 @@ namespace FullStackExercise.Web.Api.Controllers
             [FromQuery] GetCustomersByPageQuery request) =>
             Ok(await _mediator.Send(request));
 
-        [HttpPost]
+        [HttpPatch]
         [SwaggerResponse(204, "Customer updated.")]
         public async Task<ActionResult> UpdateCustomer([FromBody] UpdateCustomerCommand request)
         {

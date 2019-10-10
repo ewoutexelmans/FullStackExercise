@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using AutoMapper;
 using FullStackExercise.Business.Util;
@@ -35,6 +36,8 @@ namespace FullStackExercise.Web.Api
 
             services.AddAutoMapper(businessAssembly);
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             services.AddSwaggerGen(options =>
             {
                 options.CustomOperationIds(desc => desc.ActionDescriptor.RouteValues["action"]);
@@ -49,9 +52,9 @@ namespace FullStackExercise.Web.Api
             {
                 options.AddDefaultPolicy(builder =>
                     builder
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
         }
 
