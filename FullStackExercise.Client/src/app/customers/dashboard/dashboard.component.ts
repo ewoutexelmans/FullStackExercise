@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersDataService } from 'src/app/services/customers-data.service';
-import { FilterType } from 'src/app/api/models';
+import { FilterType, UpdateCustomerCommand } from 'src/app/api/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,5 +37,10 @@ export class DashboardComponent implements OnInit {
 
   changeHigherLower(higherLower?: boolean) {
     this.data.changeHigherLower(higherLower);
+  }
+
+  updateCustomer(customer: UpdateCustomerCommand) {
+    console.log(customer, typeof customer);
+    this.data.updateCustomer(customer);
   }
 }

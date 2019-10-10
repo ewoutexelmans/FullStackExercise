@@ -12,7 +12,10 @@
     ></app-sum-comparison>
   </div>
   <div class="mb-1">
-    <app-grid [customers]="customersPaged.customers"></app-grid>
+    <app-grid
+      [customers]="customersPaged.customers"
+      (customerUpdate)="updateCustomer($event)"
+    ></app-grid>
   </div>
   <div class="mt-1">
     <app-pagination

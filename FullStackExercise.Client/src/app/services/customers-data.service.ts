@@ -5,7 +5,8 @@ import { flatMap, publish, refCount } from 'rxjs/operators';
 import {
   GetCustomersByPageResponse,
   FilterType,
-  CustomerLookupDto
+  CustomerLookupDto,
+  UpdateCustomerCommand
 } from '../api/models';
 import { invokeRequest } from '../util/invoke-request';
 
@@ -75,15 +76,9 @@ export class CustomersDataService {
     this.higherLowerSubject$.next(higherLower);
   }
 
-  updateCustomer(customer: CustomerLookupDto) {
+  updateCustomer(customer: UpdateCustomerCommand) {
     invokeRequest(
-      this.data.updateCustomer$Json({
-        body: {
-          customerId: customer.customerId,
-          firstName: customer.firstName,
-          lastName: customer.lastName
-        }
-      }),
+      this.data.updateCustomer$Json({ body: customer }),
       this.refresh
     );
   }

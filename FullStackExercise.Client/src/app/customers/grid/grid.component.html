@@ -12,7 +12,7 @@
     *ngFor="let customer of customers"
     (ngSubmit)="onSubmit()"
   >
-    <div class="grid-row" (click)="toggleEditing(customer.customerId)">
+    <div class="grid-row" (click)="toggleEditing(customer)">
       <div>
         <app-editable-field
           [placeholder]="{ name: 'firstName', value: customer.firstName }"
@@ -33,11 +33,17 @@
     <div class="div-edit">
       <span
         *ngIf="editId !== customer.customerId; else submitButtons"
-        (click)="toggleEditing(customer.customerId)"
+        (click)="toggleEditing(customer)"
         ><i class="fa fa-edit"></i
       ></span>
       <ng-template #submitButtons>
-        <button type="submit" class="btn btn-success btn-sm mr-1">Save</button>
+        <button
+          type="submit"
+          class="btn btn-success btn-sm mr-1"
+          [disabled]="!form.dirty"
+        >
+          Save
+        </button>
         <button class="btn btn-danger btn-sm" (click)="onReset()">
           Cancel
         </button>
