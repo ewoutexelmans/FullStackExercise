@@ -1,9 +1,12 @@
-<input
-  *ngIf="editing; else notEditing"
-  type="text"
-  #box
-  (keyup)="onKey(box.value)"
-  placeholder="{{ value }}"
-  class="form-control"
-/>
-<ng-template #notEditing>{{ value }}</ng-template>
+<div [formGroup]="parentForm">
+  <input
+    *ngIf="editing; else notEditing"
+    type="text"
+    id="{{ placeholder.value }}"
+    name="{{ placeholder.value }}"
+    placeholder="{{ placeholder.value }}"
+    [formControlName]="placeholder.name"
+    class="form-control"
+  />
+  <ng-template #notEditing>{{ placeholder.value }}</ng-template>
+</div>

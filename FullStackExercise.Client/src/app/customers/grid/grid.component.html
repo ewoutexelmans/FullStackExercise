@@ -1,38 +1,46 @@
-<div class="table-fixed-head">
-  <table class="table table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Account Number</th>
-        <th scope="col">Sum of Total Due</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let customer of customers"
-        (click)="toggleEditing(customer.customerId)"
-      >
-        <td>
-          <app-editable-field
-            [(value)]="customer.firstName"
-            [editing]="editing === customer.customerId"
-          ></app-editable-field>
-        </td>
-        <td>
-          <app-editable-field
-            [(value)]="customer.lastName"
-            [editing]="editing === customer.customerId"
-          ></app-editable-field>
-        </td>
-        <td>{{ customer.accountNumber }}</td>
-        <td>{{ customer.sumOfTotalDue }}</td>
-        <td class="td-edit"><span>Edit</span></td>
-      </tr>
-    </tbody>
-  </table>
-  <h4 class="text-muted" *ngIf="!customers.length">
-    No data matches your search...
-  </h4>
+<div class="grid">
+  <div class="grid-header">
+    <h6 class="bg-dark text-white">First Name</h6>
+    <h6 class="bg-dark text-white">Last Name</h6>
+    <h6 class="bg-dark text-white">Account Number</h6>
+    <h6 class="bg-dark text-white">Sum of Total Due</h6>
+  </div>
+
+  <form
+    [formGroup]="form"
+    class="grid-row"
+    *ngFor="let customer of customers"
+    (click)="toggleEditing(customer.customerId)"
+  >
+    <div>
+      <app-editable-field
+        [placeholder]="{ name: 'firstName', value: customer.firstName }"
+        [editing]="editing === customer.customerId"
+        [parentForm]="form"
+      ></app-editable-field>
+    </div>
+    <div>
+      <app-editable-field
+        [placeholder]="{ name: 'lastName', value: customer.lastName }"
+        [editing]="editing === customer.customerId"
+        [parentForm]="form"
+      ></app-editable-field>
+    </div>
+    <div>{{ customer.accountNumber }}</div>
+    <div>{{ customer.sumOfTotalDue }}</div>
+    <div class="div-edit">
+      <span *ngIf="editing !== customer.customerId; else submitButtons"
+        ><i class="fa fa-edit"></i
+      ></span>
+      <ng-template #submitButtons>
+        <button class="btn btn-success btn-sm mr-1">Save</button>
+        <button class="btn btn-danger btn-sm">Cancel</button>
+      </ng-template>
+    </div>
+  </form>
+  <div>
+    <h4 class="text-muted" *ngIf="!customers.length">
+      No data matches your search...
+    </h4>
+  </div>
 </div>

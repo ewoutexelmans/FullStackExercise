@@ -1,28 +1,58 @@
 $rem: 16px;
+$hover-color: hsl(0, 0%, 83%);
+$background-color: hsl(0, 0%, 100%);
 
-.table-fixed-head {
-  overflow-y: auto;
+.grid {
   height: 553px + $rem;
+  overflow-y: auto;
+}
 
-  thead th {
+.grid-header {
+  display: flex;
+
+  h6 {
+    border-top: 0;
+    flex: 0 0 20%;
+    font-size: 1rem;
+    margin: 0;
+    padding: 1rem;
     position: sticky;
     top: 0;
-    border-top: 0;
   }
 }
 
-.td-edit {
-  span {
-    display: none;
-  }
-}
-
-tr:hover {
+.grid-row {
   cursor: pointer;
+  display: flex;
 
-  .td-edit {
+  div {
+    border-top: 1px solid $hover-color;
+    flex: 0 0 20%;
+    padding: 0.5rem 1rem;
+  }
+
+  .div-edit {
+    align-items: center;
+    border: 0;
+    display: flex;
+    flex: 0;
+    justify-content: space-between;
+
     span {
-      display: initial;
+      display: none;
+    }
+  }
+
+  &:hover {
+    div {
+      background: $hover-color;
+    }
+
+    .div-edit {
+      background: $background-color;
+      span {
+        display: inline-block;
+      }
     }
   }
 }
