@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CustomerLookupDto, UpdateCustomerCommand } from 'src/app/api/models';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-grid',
@@ -31,6 +31,7 @@ export class GridComponent {
     const customer = this.form.value as UpdateCustomerCommand;
     customer.customerId = this.editId;
     this.customerUpdate.emit(customer);
+    this.form.markAsPristine();
     this.editId = 0;
   }
 
