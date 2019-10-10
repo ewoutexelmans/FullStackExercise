@@ -5,7 +5,6 @@ import { flatMap, publish, refCount } from 'rxjs/operators';
 import {
   GetCustomersByPageResponse,
   FilterType,
-  CustomerLookupDto,
   UpdateCustomerCommand
 } from '../api/models';
 import { invokeRequest } from '../util/invoke-request';
