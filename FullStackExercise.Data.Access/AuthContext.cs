@@ -5,7 +5,7 @@ namespace FullStackExercise.Data.Access
 {
     public class AuthContext : DbContext
     {
-        public AuthContext(DbContextOptions options) : base(options)
+        public AuthContext(DbContextOptions<AuthContext> options) : base(options)
         {
         }
 

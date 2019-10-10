@@ -6,7 +6,7 @@ namespace FullStackExercise.Data.Access
 {
     public class AdventureWorksContext : DbContext
     {
-        public AdventureWorksContext(DbContextOptions options)
+        public AdventureWorksContext(DbContextOptions<AdventureWorksContext> options)
             : base(options)
         {
         }
