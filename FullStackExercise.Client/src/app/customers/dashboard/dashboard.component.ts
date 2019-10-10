@@ -40,7 +40,6 @@ export class DashboardComponent implements OnInit {
   }
 
   updateCustomer(customer: UpdateCustomerCommand) {
-    console.log(customer, typeof customer);
     this.data.updateCustomer(customer);
   }
 }
