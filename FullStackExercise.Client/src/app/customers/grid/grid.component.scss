@@ -28,6 +28,7 @@ $background-color: hsl(0, 0%, 100%);
 .div-edit {
   align-items: center;
   border: 0;
+  cursor: pointer;
   display: flex;
   flex: 0;
   justify-content: center;
@@ -51,10 +52,6 @@ $background-color: hsl(0, 0%, 100%);
 
 form {
   display: flex;
-
-  > div {
-    cursor: pointer;
-  }
 
   &:hover {
     div {

@@ -13,8 +13,8 @@ export class GridComponent {
 
   editId = 0;
   form = this.formBuilder.group({
-    firstName: new FormControl(''),
-    lastName: new FormControl('')
+    firstName: [''],
+    lastName: ['']
   });
 
   constructor(private formBuilder: FormBuilder) {}
