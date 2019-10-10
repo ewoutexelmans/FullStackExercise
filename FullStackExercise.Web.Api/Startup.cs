@@ -31,6 +31,8 @@ namespace FullStackExercise.Web.Api
 
             services.AddDbContext<AdventureWorksContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AdventureWorksContext")));
+            services.AddDbContext<AuthContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AuthContext")));
 
             services.AddMediatR(businessAssembly);
 
