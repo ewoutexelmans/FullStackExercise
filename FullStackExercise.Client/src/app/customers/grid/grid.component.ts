@@ -27,6 +27,7 @@ export class GridComponent {
   onSubmit() {
     const customer = this.form.value as CustomerLookupDto;
     this.customerChange.emit(customer);
+    this.toggleEditing(0);
   }
 
   onReset() {
