@@ -45,7 +45,14 @@ namespace FullStackExercise.Web.Api
                 });
             });
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                    builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,13 +69,15 @@ namespace FullStackExercise.Web.Api
                 options.RoutePrefix = string.Empty;
             });
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors();
+
+            app.UseHttpsRedirection();
+
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
