@@ -8,33 +8,36 @@
 
   <form
     [formGroup]="form"
-    class="grid-row"
     *ngFor="let customer of customers"
-    (click)="toggleEditing(customer.customerId)"
+    (ngSubmit)="onSubmit()"
   >
-    <div>
-      <app-editable-field
-        [placeholder]="{ name: 'firstName', value: customer.firstName }"
-        [editing]="editing === customer.customerId"
-        [parentForm]="form"
-      ></app-editable-field>
+    <div class="grid-row" (click)="toggleEditing(customer.customerId)">
+      <div>
+        <app-editable-field
+          [placeholder]="{ name: 'firstName', value: customer.firstName }"
+          [editing]="editId === customer.customerId"
+          [parentForm]="form"
+        ></app-editable-field>
+      </div>
+      <div>
+        <app-editable-field
+          [placeholder]="{ name: 'lastName', value: customer.lastName }"
+          [editing]="editId === customer.customerId"
+          [parentForm]="form"
+        ></app-editable-field>
+      </div>
+      <div>{{ customer.accountNumber }}</div>
+      <div>{{ customer.sumOfTotalDue }}</div>
     </div>
-    <div>
-      <app-editable-field
-        [placeholder]="{ name: 'lastName', value: customer.lastName }"
-        [editing]="editing === customer.customerId"
-        [parentForm]="form"
-      ></app-editable-field>
-    </div>
-    <div>{{ customer.accountNumber }}</div>
-    <div>{{ customer.sumOfTotalDue }}</div>
     <div class="div-edit">
-      <span *ngIf="editing !== customer.customerId; else submitButtons"
+      <span *ngIf="editId !== customer.customerId; else submitButtons"
         ><i class="fa fa-edit"></i
       ></span>
       <ng-template #submitButtons>
-        <button class="btn btn-success btn-sm mr-1">Save</button>
-        <button class="btn btn-danger btn-sm">Cancel</button>
+        <button type="submit" class="btn btn-success btn-sm mr-1">Save</button>
+        <button class="btn btn-danger btn-sm" (click)="onReset()">
+          Cancel
+        </button>
       </ng-template>
     </div>
   </form>
@@ -44,3 +47,4 @@
     </h4>
   </div>
 </div>
+<div>{{ editId }}</div>

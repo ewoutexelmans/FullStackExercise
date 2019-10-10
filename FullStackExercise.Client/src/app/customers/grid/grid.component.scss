@@ -12,7 +12,7 @@ $background-color: hsl(0, 0%, 100%);
 
   h6 {
     border-top: 0;
-    flex: 0 0 20%;
+    flex: 0 0 21%;
     font-size: 1rem;
     margin: 0;
     padding: 1rem;
@@ -21,27 +21,33 @@ $background-color: hsl(0, 0%, 100%);
   }
 }
 
-.grid-row {
-  cursor: pointer;
+.div-edit {
+  align-items: center;
+  border: 0;
   display: flex;
+  flex: 0;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+
+  span {
+    display: none;
+  }
+}
+
+.grid-row {
+  display: flex;
+  flex: 0 0 84%;
 
   div {
     border-top: 1px solid $hover-color;
-    flex: 0 0 20%;
+    flex: 1 1 25%;
     padding: 0.5rem 1rem;
   }
+}
 
-  .div-edit {
-    align-items: center;
-    border: 0;
-    display: flex;
-    flex: 0;
-    justify-content: space-between;
-
-    span {
-      display: none;
-    }
-  }
+form {
+  cursor: pointer;
+  display: flex;
 
   &:hover {
     div {

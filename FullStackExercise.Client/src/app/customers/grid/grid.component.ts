@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CustomerLookupDto } from 'src/app/api/models';
 import { FormBuilder } from '@angular/forms';
 
@@ -7,10 +7,11 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent {
   @Input() customers: Array<CustomerLookupDto>;
+  @Output() customerChange = new EventEmitter<CustomerLookupDto>();
 
-  editing = 0;
+  editId = 0;
   form = this.formBuilder.group({
     firstName: [''],
     lastName: ['']
@@ -18,11 +19,17 @@ export class GridComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit() {
-    this.form.valueChanges.subscribe(newVal => console.log(newVal));
+  toggleEditing(id: number) {
+    this.form.reset();
+    this.editId = id;
   }
 
-  toggleEditing(id: number) {
-    this.editing = id;
+  onSubmit() {
+    const customer = this.form.value as CustomerLookupDto;
+    this.customerChange.emit(customer);
+  }
+
+  onReset() {
+    this.toggleEditing(0);
   }
 }
